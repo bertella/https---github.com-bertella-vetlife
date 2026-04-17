@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-vet",
+      "description": "Veterinarian smiling with a happy dog in a modern clinic",
+      "imageUrl": "https://picsum.photos/seed/vet-hero/1200/800",
+      "imageHint": "veterinarian dog"
+    },
+    {
+      "id": "service-castration",
+      "description": "Surgical tools or professional pet surgery preparation",
+      "imageUrl": "https://picsum.photos/seed/vet-surgery/600/400",
+      "imageHint": "pet surgery"
+    },
+    {
+      "id": "service-grooming",
+      "description": "Dog getting a professional haircut and grooming",
+      "imageUrl": "https://picsum.photos/seed/grooming/600/400",
+      "imageHint": "dog grooming"
+    },
+    {
+      "id": "service-clinic",
+      "description": "Veterinary clinical consultation room",
+      "imageUrl": "https://picsum.photos/seed/vet-clinic/600/400",
+      "imageHint": "vet clinic"
+    },
+    {
+      "id": "trust-team",
+      "description": "Professional veterinary team collaborating",
+      "imageUrl": "https://picsum.photos/seed/vet-team/800/600",
+      "imageHint": "veterinary team"
+    }
+  ]
 }
