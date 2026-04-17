@@ -11,10 +11,8 @@ import {
   Activity, 
   Stethoscope, 
   ShieldCheck, 
-  ChevronDown,
   ChevronRight,
-  Heart,
-  Calendar
+  Heart
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -26,6 +24,7 @@ import {
 } from "@/components/ui/accordion";
 import { WhatsAppFloating } from "@/components/landing/WhatsAppFloating";
 import { AICopyGenerator } from "@/components/landing/AICopyGenerator";
+import { Navbar } from "@/components/landing/Navbar";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export default function LandingPage() {
@@ -35,44 +34,12 @@ export default function LandingPage() {
   const whatsappUrl = "https://wa.me/5493512323695?text=Hola%20Animal%20Life,%20necesito%20realizar%20una%20consulta.";
 
   const trackEvent = (label: string) => {
-    // Placeholder for GTM/GA events
     console.log(`Tracking event: ${label}`);
   };
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-40 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="bg-primary p-1.5 rounded-lg text-white">
-              <Heart className="w-6 h-6 fill-current" />
-            </div>
-            <span className="font-headline font-bold text-xl tracking-tight">Animal Life</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="#servicios" className="hover:text-primary transition-colors">Servicios</a>
-            <a href="#beneficios" className="hover:text-primary transition-colors">Beneficios</a>
-            <a href="#ubicacion" className="hover:text-primary transition-colors">Ubicación</a>
-            <a href="#faq" className="hover:text-primary transition-colors">Preguntas</a>
-          </nav>
-          <div className="flex items-center gap-4">
-            <a 
-              href="tel:03512323695" 
-              className="hidden sm:flex items-center gap-2 text-sm font-semibold text-primary"
-              onClick={() => trackEvent("Phone Call Header")}
-            >
-              <Phone className="w-4 h-4" />
-              0351 232-3695
-            </a>
-            <Button asChild className="font-bold bg-accent hover:bg-accent/90">
-              <a href={whatsappUrl} target="_blank" onClick={() => trackEvent("WhatsApp Header")}>
-                Solicitar Turno
-              </a>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -91,7 +58,7 @@ export default function LandingPage() {
                 <span className="font-semibold block mt-2 text-foreground">Urgencias disponibles 24/7 para tu tranquilidad.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild className="h-14 px-8 text-lg font-bold bg-[#25D366] hover:bg-[#128C7E] border-none">
+                <Button size="lg" asChild className="h-14 px-8 text-lg font-bold bg-[#25D366] hover:bg-[#128C7E] border-none shadow-lg">
                   <a href={whatsappUrl} target="_blank" onClick={() => trackEvent("WhatsApp Hero")}>
                     <MessageCircle className="mr-2 w-6 h-6" />
                     Consultar por WhatsApp
@@ -160,7 +127,7 @@ export default function LandingPage() {
                   title: "Cirugías", 
                   desc: "Intervenciones quirúrgicas de alta y baja complejidad con enfoque profesional.",
                   icon: <Stethoscope className="w-6 h-6" />,
-                  img: images.find(i => i.id === "hero-vet")?.imageUrl, // fallback or specific
+                  img: images.find(i => i.id === "hero-vet")?.imageUrl,
                   hint: "surgery tools"
                 },
                 { 
@@ -268,12 +235,12 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* AI Copy Generator Tool (Feature Requested) */}
+        {/* AI Copy Generator Tool */}
         <section className="py-24 container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="text-center space-y-4">
               <h2 className="text-3xl font-black">Potenciamos tu comunicación con IA</h2>
-              <p className="text-muted-foreground">Como desarrolladores senior, incluimos herramientas que ayudan al negocio a crecer. Probá nuestro generador de copy para tus anuncios.</p>
+              <p className="text-muted-foreground">Herramientas que ayudan al negocio a crecer. Generá variaciones de copy para tus anuncios.</p>
             </div>
             <AICopyGenerator />
           </div>
@@ -325,7 +292,6 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="rounded-[2rem] overflow-hidden shadow-2xl border border-border min-h-[400px] relative">
-                {/* Embed Google Maps */}
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3407.2458421868494!2d-64.20456482343992!3d-31.352199974292153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432997184518423%3A0x86134b7f08b38779!2sDami%C3%A1n%20Garat%202630%2C%20X5008AHO%20C%C3%B3rdoba!5e0!3m2!1ses!2sar!4v1711234567890!5m2!1ses!2sar" 
                   width="100%" 
@@ -408,7 +374,6 @@ export default function LandingPage() {
                 Especialistas en medicina veterinaria preventiva y curativa en Córdoba. Cuidamos a tus mascotas con el amor y profesionalismo que se merecen.
               </p>
               <div className="flex gap-4">
-                {/* Social icons placeholders */}
                 <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-primary transition-colors cursor-pointer" />
                 <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-primary transition-colors cursor-pointer" />
                 <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-primary transition-colors cursor-pointer" />
@@ -456,13 +421,12 @@ export default function LandingPage() {
             <div className="flex gap-6">
               <a href="#" className="hover:text-white transition-colors">Privacidad</a>
               <a href="#" className="hover:text-white transition-colors">Términos</a>
-              <a href="#" className="hover:text-white transition-colors">SEO Local por Animal Life Express</a>
+              <a href="#" className="hover:text-white transition-colors">SEO Local</a>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Floating Elements */}
       <WhatsAppFloating />
     </div>
   );
