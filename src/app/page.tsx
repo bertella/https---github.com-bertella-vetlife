@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -167,7 +166,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Benefits/Differentials */}
+        {/* Benefits Section */}
         <section id="beneficios" className="py-24 bg-secondary/20">
           <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">

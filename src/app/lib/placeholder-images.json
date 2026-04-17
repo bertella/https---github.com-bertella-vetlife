@@ -1,52 +1,51 @@
-
 {
   "placeholderImages": [
     {
       "id": "hero-vet",
       "description": "Veterinaria Animal Life en Nuevo Poeta Lugones, Córdoba",
-      "imageUrl": "/images/veterinaria-cordoba.jpg",
+      "imageUrl": "/images/veterinaria-cordoba.png",
       "imageHint": "veterinaria cordoba"
     },
     {
       "id": "service-castration",
       "description": "Servicio de castraciones profesionales",
-      "imageUrl": "/images/castraciones.jpg",
+      "imageUrl": "/images/castraciones.png",
       "imageHint": "pet surgery"
     },
     {
       "id": "service-surgery",
       "description": "Cirugías veterinarias de alta complejidad",
-      "imageUrl": "/images/cirugias.jpg",
+      "imageUrl": "/images/cirugias.png",
       "imageHint": "surgery tools"
     },
     {
       "id": "service-grooming",
       "description": "Peluquería canina y felina especializada",
-      "imageUrl": "/images/peluqueria.jpg",
+      "imageUrl": "/images/peluqueria.png",
       "imageHint": "dog grooming"
     },
     {
       "id": "service-clinic",
       "description": "Consulta clínica general veterinaria",
-      "imageUrl": "/images/clinica.jpg",
+      "imageUrl": "/images/clinica.png",
       "imageHint": "vet clinic"
     },
     {
       "id": "service-emergency",
       "description": "Atención de urgencias veterinarias",
-      "imageUrl": "/images/urgencias.jpg",
+      "imageUrl": "/images/urgencias.png",
       "imageHint": "vet emergency"
     },
     {
       "id": "service-lab",
       "description": "Análisis clínicos y laboratorio",
-      "imageUrl": "/images/analisis.jpg",
+      "imageUrl": "/images/analisis.png",
       "imageHint": "medical lab"
     },
     {
       "id": "trust-team",
       "description": "Equipo profesional de Animal Life",
-      "imageUrl": "/images/equipo.jpg",
+      "imageUrl": "/images/equipo.png",
       "imageHint": "veterinary team"
     }
   ]
