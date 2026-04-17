@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -120,6 +119,7 @@ export default function LandingPage() {
                     fill
                     className="object-cover"
                     priority
+                    data-ai-hint={heroImage.imageHint}
                   />
                 )}
               </div>
@@ -146,6 +146,7 @@ export default function LandingPage() {
                           alt={service.title} 
                           fill 
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          data-ai-hint={service.hint}
                         />
                       )}
                       <div className="absolute top-4 left-4 bg-primary text-white p-2.5 rounded-xl shadow-lg">
@@ -203,6 +204,7 @@ export default function LandingPage() {
                     alt={teamImage.description}
                     fill 
                     className="object-cover"
+                    data-ai-hint={teamImage.imageHint}
                   />
                 )}
               </div>
