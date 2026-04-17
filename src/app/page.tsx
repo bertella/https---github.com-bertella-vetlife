@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -28,14 +29,55 @@ import { Navbar } from "@/components/landing/Navbar";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export default function LandingPage() {
-  const images = PlaceHolderImages;
-  const heroImg = images.find(img => img.id === "hero-vet");
-
   const whatsappUrl = "https://wa.me/5493512323695?text=Hola%20Animal%20Life,%20necesito%20realizar%20una%20consulta.";
+  
+  const heroImage = PlaceHolderImages.find(img => img.id === "hero-vet");
+  const teamImage = PlaceHolderImages.find(img => img.id === "trust-team");
 
-  const trackEvent = (label: string) => {
-    console.log(`Tracking event: ${label}`);
-  };
+  const servicesList = [
+    { 
+      id: "service-castration",
+      title: "Castraciones", 
+      desc: "Control reproductivo seguro con anestesia monitoreada y recuperación rápida.",
+      icon: <Activity className="w-6 h-6" />,
+      hint: "pet surgery"
+    },
+    { 
+      id: "service-surgery",
+      title: "Cirugías", 
+      desc: "Intervenciones quirúrgicas de alta y baja complejidad con enfoque profesional.",
+      icon: <Stethoscope className="w-6 h-6" />,
+      hint: "surgery tools"
+    },
+    { 
+      id: "service-grooming",
+      title: "Peluquería", 
+      desc: "Estética canina y felina. Baño, corte de pelo y uñas con trato súper cariñoso.",
+      icon: <Scissors className="w-6 h-6" />,
+      hint: "dog grooming"
+    },
+    { 
+      id: "service-clinic",
+      title: "Atención Clínica", 
+      desc: "Consultas generales, vacunas y controles de salud para todas las edades.",
+      icon: <Heart className="w-6 h-6" />,
+      hint: "vet clinic"
+    },
+    { 
+      id: "service-emergency",
+      title: "Urgencias", 
+      desc: "Atención inmediata para situaciones críticas. Tu tranquilidad es nuestra prioridad.",
+      icon: <Clock className="w-6 h-6" />,
+      hint: "vet emergency"
+    },
+    { 
+      id: "service-lab",
+      title: "Análisis Clínicos", 
+      desc: "Diagnósticos precisos mediante laboratorio especializado para resultados rápidos.",
+      icon: <ShieldCheck className="w-6 h-6" />,
+      hint: "medical lab"
+    }
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -55,11 +97,11 @@ export default function LandingPage() {
               </h1>
               <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
                 Brindamos atención profesional, cercana y personalizada para el bienestar de tu mascota. 
-                <span className="font-semibold block mt-2 text-foreground">Urgencias disponibles 24/7 para tu tranquilidad.</span>
+                <span className="font-semibold block mt-2 text-foreground">Urgencias disponibles para tu tranquilidad.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild className="h-14 px-8 text-lg font-bold bg-[#25D366] hover:bg-[#128C7E] border-none shadow-lg">
-                  <a href={whatsappUrl} target="_blank" onClick={() => trackEvent("WhatsApp Hero")}>
+                  <a href={whatsappUrl} target="_blank">
                     <MessageCircle className="mr-2 w-6 h-6" />
                     Consultar por WhatsApp
                   </a>
@@ -84,18 +126,14 @@ export default function LandingPage() {
             <div className="relative group">
               <div className="absolute -inset-4 bg-primary/10 rounded-[2rem] blur-2xl group-hover:bg-primary/20 transition-all"></div>
               <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white bg-muted">
-                {heroImg ? (
+                {heroImage && (
                   <Image 
-                    src={heroImg.imageUrl} 
-                    alt={heroImg.description}
+                    src={heroImage.imageUrl}
+                    alt={heroImage.description}
                     fill
                     className="object-cover"
-                    data-ai-hint={heroImg.imageHint}
+                    data-ai-hint={heroImage.imageHint}
                   />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-muted-foreground italic">
-                    Cargando imagen...
-                  </div>
                 )}
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl flex items-center gap-4 border border-border animate-in fade-in slide-in-from-left-4 duration-700 delay-300">
@@ -119,77 +157,37 @@ export default function LandingPage() {
               <p className="text-muted-foreground">Especialistas en el cuidado de la salud animal en Córdoba con equipamiento de vanguardia.</p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                { 
-                  title: "Castraciones", 
-                  desc: "Control reproductivo seguro con anestesia monitoreada y recuperación rápida.",
-                  icon: <Activity className="w-6 h-6" />,
-                  img: images.find(i => i.id === "service-castration")?.imageUrl,
-                  hint: "pet surgery"
-                },
-                { 
-                  title: "Cirugías", 
-                  desc: "Intervenciones quirúrgicas de alta y baja complejidad con enfoque profesional.",
-                  icon: <Stethoscope className="w-6 h-6" />,
-                  img: images.find(i => i.id === "service-surgery")?.imageUrl,
-                  hint: "surgery tools"
-                },
-                { 
-                  title: "Peluquería", 
-                  desc: "Estética canina y felina. Baño, corte de pelo y uñas con trato súper cariñoso.",
-                  icon: <Scissors className="w-6 h-6" />,
-                  img: images.find(i => i.id === "service-grooming")?.imageUrl,
-                  hint: "dog grooming"
-                },
-                { 
-                  title: "Atención Clínica", 
-                  desc: "Consultas generales, vacunas y controles de salud para todas las edades.",
-                  icon: <Heart className="w-6 h-6" />,
-                  img: images.find(i => i.id === "service-clinic")?.imageUrl,
-                  hint: "vet clinic"
-                },
-                { 
-                  title: "Urgencias", 
-                  desc: "Atención inmediata para situaciones críticas. Tu tranquilidad es nuestra prioridad.",
-                  icon: <Clock className="w-6 h-6" />,
-                  img: images.find(i => i.id === "service-emergency")?.imageUrl,
-                  hint: "vet emergency"
-                },
-                { 
-                  title: "Análisis Clínicos", 
-                  desc: "Diagnósticos precisos mediante laboratorio especializado para resultados rápidos.",
-                  icon: <ShieldCheck className="w-6 h-6" />,
-                  img: images.find(i => i.id === "service-lab")?.imageUrl,
-                  hint: "medical lab"
-                }
-              ].map((service, i) => (
-                <Card key={i} className="overflow-hidden border-border group hover:shadow-xl transition-all duration-300">
-                  <div className="relative h-48 bg-muted">
-                    {service.img && (
-                      <Image 
-                        src={service.img} 
-                        alt={service.title} 
-                        fill 
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        data-ai-hint={service.hint}
-                      />
-                    )}
-                    <div className="absolute top-4 left-4 bg-primary text-white p-2.5 rounded-xl shadow-lg">
-                      {service.icon}
+              {servicesList.map((service, i) => {
+                const imgData = PlaceHolderImages.find(img => img.id === service.id);
+                return (
+                  <Card key={i} className="overflow-hidden border-border group hover:shadow-xl transition-all duration-300">
+                    <div className="relative h-48 bg-muted">
+                      {imgData && (
+                        <Image 
+                          src={imgData.imageUrl} 
+                          alt={service.title} 
+                          fill 
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          data-ai-hint={service.hint}
+                        />
+                      )}
+                      <div className="absolute top-4 left-4 bg-primary text-white p-2.5 rounded-xl shadow-lg">
+                        {service.icon}
+                      </div>
                     </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-6">{service.desc}</p>
-                    <Button variant="link" className="p-0 h-auto font-bold text-primary flex items-center group/btn" asChild>
-                      <a href={whatsappUrl} target="_blank">
-                        Consultar servicio
-                        <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </a>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+                    <CardContent className="p-6">
+                      <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-6">{service.desc}</p>
+                      <Button variant="link" className="p-0 h-auto font-bold text-primary flex items-center group/btn" asChild>
+                        <a href={whatsappUrl} target="_blank">
+                          Consultar servicio
+                          <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                        </a>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -226,12 +224,13 @@ export default function LandingPage() {
             </div>
             <div className="relative">
               <div className="aspect-square rounded-[3rem] overflow-hidden shadow-2xl relative bg-muted">
-                {images.find(img => img.id === "trust-team")?.imageUrl && (
-                  <Image 
-                    src={images.find(img => img.id === "trust-team")!.imageUrl} 
-                    alt="Equipo veterinario" 
+                {teamImage && (
+                  <Image  
+                    src={teamImage.imageUrl} 
+                    alt={teamImage.description}
                     fill 
                     className="object-cover"
+                    data-ai-hint={teamImage.imageHint}
                   />
                 )}
               </div>
@@ -351,13 +350,13 @@ export default function LandingPage() {
             <p className="text-xl opacity-90 max-w-2xl mx-auto">No esperes más. Un diagnóstico temprano puede salvar vidas. Estamos listos para ayudarte ahora mismo.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button size="lg" className="h-16 px-10 text-xl font-black bg-white text-primary hover:bg-secondary border-none shadow-2xl" asChild>
-                <a href={whatsappUrl} target="_blank" onClick={() => trackEvent("WhatsApp Final CTA")}>
+                <a href={whatsappUrl} target="_blank">
                   <MessageCircle className="mr-2 w-6 h-6 fill-primary" />
                   Contactar por WhatsApp
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="h-16 px-10 text-xl font-black border-white text-white hover:bg-white/10" asChild>
-                <a href="tel:03512323695" onClick={() => trackEvent("Phone Final CTA")}>
+                <a href="tel:03512323695">
                   Llamar ahora
                 </a>
               </Button>
