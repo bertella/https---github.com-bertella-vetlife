@@ -1,7 +1,7 @@
-
 "use client";
 
 import Image from "next/image";
+import { sendGAEvent } from '@next/third-parties/google';
 import { 
   Phone, 
   MessageCircle, 
@@ -34,6 +34,14 @@ import { Separator } from "@/components/ui/separator";
 export default function LandingPage() {
   const whatsappUrl = "https://wa.me/5493512323695?text=Hola%20Animal%20Life,%20necesito%20realizar%20una%20consulta.";
   
+  // Función centralizada para tracking de WhatsApp
+  const trackWhatsApp = (ubicacion: string) => {
+    sendGAEvent('event', 'whatsapp_contact', { 
+      location: ubicacion,
+      neighborhood: 'Nuevo Poeta Lugones'
+    });
+  };
+
   const heroImageData = PlaceHolderImages.find(img => img.id === "hero-vet");
   const teamImageData = PlaceHolderImages.find(img => img.id === "trust-team");
 
@@ -103,7 +111,12 @@ export default function LandingPage() {
                 <span className="font-semibold block mt-2 text-foreground">Urgencias disponibles para tu tranquilidad.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild className="h-14 px-8 text-lg font-bold bg-[#25D366] hover:bg-[#128C7E] border-none shadow-lg">
+                <Button 
+                  size="lg" 
+                  asChild 
+                  className="h-14 px-8 text-lg font-bold bg-[#25D366] hover:bg-[#128C7E] border-none shadow-lg"
+                  onClick={() => trackWhatsApp('hero_cta')}
+                >
                   <a href={whatsappUrl} target="_blank">
                     <MessageCircle className="mr-2 w-6 h-6" />
                     Consultar por WhatsApp
@@ -124,7 +137,6 @@ export default function LandingPage() {
                     fill
                     className="object-cover"
                     priority
-                    data-ai-hint="veterinaria cordoba"
                   />
                 )}
               </div>
@@ -151,7 +163,6 @@ export default function LandingPage() {
                           alt={service.title} 
                           fill 
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          data-ai-hint={service.hint}
                         />
                       )}
                       <div className="absolute top-4 left-4 bg-primary text-white p-2.5 rounded-xl shadow-lg">
@@ -161,7 +172,12 @@ export default function LandingPage() {
                     <CardContent className="p-6">
                       <h3 className="text-xl font-bold mb-3">{service.title}</h3>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-6">{service.desc}</p>
-                      <Button variant="link" className="p-0 h-auto font-bold text-primary flex items-center group/btn" asChild>
+                      <Button 
+                        variant="link" 
+                        className="p-0 h-auto font-bold text-primary flex items-center group/btn" 
+                        asChild
+                        onClick={() => trackWhatsApp(`servicio_${service.title.toLowerCase()}`)}
+                      >
                         <a href={whatsappUrl} target="_blank">
                           Consultar servicio
                           <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -209,7 +225,6 @@ export default function LandingPage() {
                     alt={teamImageData.description}
                     fill 
                     className="object-cover"
-                    data-ai-hint="veterinary team"
                   />
                 )}
               </div>
@@ -226,13 +241,12 @@ export default function LandingPage() {
             </div>
             <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-muted aspect-video md:aspect-[21/9]">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.495270273874!2d-64.2014072!3d-31.3729227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432997238241b31%3A0xb5b73307567e780d!2sDami%C3%A1n%20Garat%202630%2C%20X5008%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3407.2345!2d-64.1952!3d-31.3654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDIxJzU1LjQiUyA2NMKwMTEnNDIuNyJX!5e0!3m2!1ses!2sar!4v1620000000000" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
                 allowFullScreen 
                 loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
             <div className="mt-12 grid md:grid-cols-3 gap-8">
@@ -302,7 +316,6 @@ export default function LandingPage() {
       <footer className="bg-foreground text-white pt-20 pb-10">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            {/* Column 1: Brand */}
             <div className="space-y-6">
               <div className="flex items-center gap-2">
                 <div className="bg-primary p-1.5 rounded-lg text-white">
@@ -311,7 +324,7 @@ export default function LandingPage() {
                 <span className="font-headline font-bold text-2xl tracking-tight">Animal Life</span>
               </div>
               <p className="text-white/60 leading-relaxed text-sm">
-                Comprometidos con la salud y el bienestar de tus mascotas en Córdoba. Brindamos atención veterinaria de alta calidad con un toque humano y profesional.
+                Comprometidos con la salud y el bienestar de tus mascotas en Córdoba.
               </p>
               <div className="flex items-center gap-4">
                 <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
@@ -326,19 +339,15 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Column 2: Quick Links */}
             <div className="space-y-6">
               <h4 className="text-lg font-bold">Enlaces Rápidos</h4>
               <nav className="flex flex-col gap-4 text-sm text-white/60">
                 <a href="#top" className="hover:text-primary transition-colors">Inicio</a>
                 <a href="#servicios" className="hover:text-primary transition-colors">Nuestros Servicios</a>
-                <a href="#beneficios" className="hover:text-primary transition-colors">¿Por qué elegirnos?</a>
                 <a href="#ubicacion" className="hover:text-primary transition-colors">Dónde Estamos</a>
-                <a href="#faq" className="hover:text-primary transition-colors">Preguntas Frecuentes</a>
               </nav>
             </div>
 
-            {/* Column 3: Contact Info */}
             <div className="space-y-6">
               <h4 className="text-lg font-bold">Contacto</h4>
               <div className="space-y-4 text-sm text-white/60">
@@ -350,30 +359,21 @@ export default function LandingPage() {
                   <Phone className="w-5 h-5 text-primary shrink-0" />
                   <a href="tel:03512323695" className="hover:text-primary transition-colors">0351 232-3695</a>
                 </div>
-                <div className="flex items-center gap-3">
-                  <MessageCircle className="w-5 h-5 text-primary shrink-0" />
-                  <a href={whatsappUrl} target="_blank" className="hover:text-primary transition-colors">WhatsApp Directo</a>
-                </div>
               </div>
             </div>
 
-            {/* Column 4: Hours */}
             <div className="space-y-6">
-              <h4 className="text-lg font-bold">Horarios de Atención</h4>
+              <h4 className="text-lg font-bold">Horarios</h4>
               <div className="space-y-3 text-sm text-white/60">
                 <div className="flex justify-between items-center pb-2 border-b border-white/10">
                   <span>Lunes a Viernes</span>
                   <span className="text-white font-medium">9:00 - 13:30 | 16:00 - 20:00</span>
                 </div>
-                <div className="flex justify-between items-center pb-2 border-b border-white/10">
-                  <span>Sábados</span>
-                  <span className="text-white font-medium">9:00 - 13:30</span>
-                </div>
                 <div className="flex justify-between items-center text-primary font-bold pt-2">
                   <span>Urgencias</span>
                   <span className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                    Consultar WhatsApp
+                    WhatsApp
                   </span>
                 </div>
               </div>
@@ -383,11 +383,7 @@ export default function LandingPage() {
           <Separator className="bg-white/10 mb-8" />
           
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-white/40">
-            <p>© {new Date().getFullYear()} Veterinaria Animal Life. Todos los derechos reservados.</p>
-            <div className="flex gap-8">
-              <a href="#" className="hover:text-white transition-colors">Políticas de Privacidad</a>
-              <a href="#" className="hover:text-white transition-colors">Términos de Servicio</a>
-            </div>
+            <p>© {new Date().getFullYear()} Veterinaria Animal Life. Córdoba, Argentina.</p>
           </div>
         </div>
       </footer>
