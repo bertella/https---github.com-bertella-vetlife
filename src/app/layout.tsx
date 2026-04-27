@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
-import { GoogleAnalytics } from '@next/third-parties/google';
+// Importamos el componente oficial para Next.js
+import { GoogleTagManager } from '@next/third-parties/google';
 
-// 1. Definición de Metadatos (SEO optimizado para Córdoba)
 export const metadata: Metadata = {
   title: 'Veterinaria Animal Life | Urgencias en Nuevo Poeta Lugones, Córdoba',
   description: 'Atención veterinaria profesional en Nuevo Poeta Lugones, Córdoba. Urgencias, castraciones, cirugías y peluquería canina. ¡Contactanos por WhatsApp!',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: 'Atención profesional y cercana para tu mascota. Urgencias disponibles.',
     locale: 'es_AR',
     type: 'website',
-    url: 'https://animallife.com.ar', // Cambialo por tu URL real
+    url: 'https://animallife.com.ar',
   },
 };
 
@@ -31,7 +31,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* Optimizamos la carga de fuentes */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link 
@@ -40,17 +39,11 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased bg-background text-foreground">
-        {children}
-        
-        {/* Componentes Globales de UI */}
-        <Toaster />
+        {/* Tu ID de GTM configurado correctamente */}
+        <GoogleTagManager gtmId="GTM-T4LLRB99" />
 
-        {/* Google Analytics 4 
-          Sustituye 'G-XXXXXXXXXX' por tu ID real. 
-          Este componente reemplaza la necesidad de scripts manuales de GTM 
-          si solo vas a usar Analytics.
-        */}
-        <GoogleAnalytics gaId="G-DZ9FW6PVHK" />
+        {children}
+        <Toaster />
       </body>
     </html>
   );
